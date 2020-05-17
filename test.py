@@ -8,26 +8,31 @@ class ClientThread(threading.Thread):
        self.conn = conn
        print("New connection added", Address)       #############  Handle client connection #############
    def run(self):
-       self.conn.send(bytes("You are connected to my server",'utf-8'))
-
-
-class RecieveThread(threading.Thread):       
-   def __init__(self,conn,Address):               
-      threading.Thread.__init__(self)
-      self.conn = conn
-   def run(self):                                ############## Recieves messages from Client_1 ################# 
-       global data
        data = self.conn.recv(1024).decode()
-       print("New message:  ", str( data))
-
-
-class SendThread(threading.Thread):
-   def __init__(self,conn,Address):
-       threading.Thread.__init__(self)           ################ Sends messages to Client_2 ##################
-       self.conn = conn
-   def run(self):
+       print("New message:  ", str(data))
        data = input('->')
        self.conn.send(data.encode())
+
+
+#class RecieveThread(threading.Thread):       
+ #  def __init__(self,conn,Address):               
+  #    threading.Thread.__init__(self)
+   #   self.conn = conn
+  # def run(self):                                ############## Recieves messages from Client_1 ################# 
+      # global data
+   #    data = self.conn.recv(1024).decode()
+    #   print("New message:  ", str( data))
+     #  data = input('->')
+      # self.conn.send(data.encode())
+
+
+#class SendThread(threading.Thread):
+ #  def __init__(self,conn,Address):
+  #     threading.Thread.__init__(self)           ################ Sends messages to Client_2 ##################
+   #    self.conn = conn
+  # def run(self):
+   #    data = input('->')
+    #   self.conn.send(data.encode())
 
 ############# Main Program ###########
 host = ''          
@@ -46,6 +51,8 @@ while True:
 
  ClientThread(conn,Address).start()    
 
- RecieveThread(conn,Address).start()  
+ #RecieveThread(conn,Address).start()  
 
- SendThread(conn,Address).start()
+# SendThread(conn,Address).start()
+
+
