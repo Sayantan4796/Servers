@@ -18,7 +18,7 @@ class RecieveThread(threading.Thread):
    def run(self):                                ############## Recieves messages from Client_1 ################# 
        global data
        data = self.conn.recv(1024).decode()
-       print("New message:  ",  data)
+       print("New message:  ", str( data))
 
 
 class SendThread(threading.Thread):
@@ -26,7 +26,7 @@ class SendThread(threading.Thread):
        threading.Thread.__init__(self)           ################ Sends messages to Client_2 ##################
        self.conn = conn
    def run(self):
-       #print("Sending this data to mobile unit")
+       data = input('->')
        self.conn.send(data.encode())
 
 ############# Main Program ###########
@@ -48,4 +48,4 @@ while True:
 
  RecieveThread(conn,Address).start()  
 
- SendThread(conn,Address).start())
+ SendThread(conn,Address).start()
